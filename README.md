@@ -47,7 +47,8 @@ GitHub Pages can only serve static files, so it cannot run Django. The demo page
 from PyPI with `micropip`, unpacks this repository's Django code into Pyodide's virtual file system
 and runs `migrate`. Each click or form submission inside the frame is passed to Django's test
 client, and the HTML response is rendered back into the frame. The SQLite database lives in
-IndexedDB, so tasks survive a reload; "Reset demo data" deletes it.
+IndexedDB, so tasks survive a reload; "Reset demo data" deletes it. A new database starts with
+three example tasks so the first screen is not empty.
 
 Differences from a real deployment, stated plainly:
 

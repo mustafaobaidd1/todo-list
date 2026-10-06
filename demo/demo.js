@@ -54,7 +54,18 @@ from django.test import Client
 
 def prepare():
     call_command('migrate', verbosity=0)
-    user, _ = User.objects.get_or_create(username='demo')
+    user, created = User.objects.get_or_create(username='demo')
+    if created:
+        # A fresh database starts with a few example tasks so the list is not empty.
+        from tasks.models import Task
+        Task.objects.bulk_create([
+            Task(creator=user, title='Plan a weekend walk through Jerash',
+                 description='Check the opening hours of the ruins and pick a cafe nearby.'),
+            Task(creator=user, title='Water the olive tree', done=True,
+                 description='Before sunset, about ten litres.'),
+            Task(creator=user, title='Read about class-based views',
+                 description='Compare them with the function views used in this app.'),
+        ])
     client = Client()
     client.force_login(user)
     return client
