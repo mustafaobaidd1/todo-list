@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>To-Do List — the Django app, running in your browser</title>
+    <meta
+      name="description"
+      content="The Django To-Do List project from this repository, running unmodified inside the browser with Pyodide (CPython on WebAssembly)."
+    />
+    <meta name="theme-color" content="#0c3b2e" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <h1>To-Do List <span>· Django</span></h1>
+        <p class="tag">Running in your browser with Pyodide</p>
+      </div>
+      <nav aria-label="Project links">
+        <a href="https://mustafaobaidd1.github.io/">← Mustafa Obaid · Portfolio</a>
+        <a href="https://github.com/mustafaobaidd1/todo-list">Source code</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="explain" aria-labelledby="what">
+        <h2 id="what">What you are looking at</h2>
+        <p>
+          This is the unmodified Django project from
+          <a href="https://github.com/mustafaobaidd1/todo-list">this repository</a>. Instead of a
+          server, <a href="https://pyodide.org/">Pyodide</a> runs CPython compiled to WebAssembly in
+          this tab; each click or form goes to Django's test client and the HTML it returns is shown in
+          the frame below. The SQLite database is stored in your browser (IndexedDB), so nothing leaves
+          your computer. You are signed in automatically as a demo user, because the original project
+          signs users in through the Django admin.
+        </p>
+        <p class="small">
+          First load downloads about 15&nbsp;MB (Python and Django) and is cached afterwards.
+        </p>
+      </section>
+
+      <section class="window" aria-label="The Django app">
+        <div class="chrome">
+          <button type="button" class="nav" id="back" aria-label="Back" disabled>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" /></svg>
+          </button>
+          <button type="button" class="nav" id="reload" aria-label="Reload this page" disabled>
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M13 8a5 5 0 1 1-1.5-3.6M13 2.5V5h-2.5" />
+            </svg>
+          </button>
+          <p class="address" id="address" aria-label="Current Django path">/tasks/</p>
+          <button type="button" class="reset" id="reset" disabled>Reset demo data</button>
+        </div>
+
+        <div class="stage">
+          <iframe id="frame" title="Django To-Do List app" hidden></iframe>
+
+          <div class="boot" id="boot" role="status" aria-live="polite">
+            <ol class="steps" id="steps">
+              <li data-step="0">Loading Python (Pyodide)</li>
+              <li data-step="1">Installing Django 5.2</li>
+              <li data-step="2">Copying the project into the virtual file system</li>
+              <li data-step="3">Running database migrations</li>
+              <li data-step="4">Starting the app</li>
+            </ol>
+          </div>
+
+          <div class="error" id="error" role="alert" hidden>
+            <h2>The demo could not start</h2>
+            <p id="error-text"></p>
+            <p>
+              You can still read the code and run it locally:
+              <a href="https://github.com/mustafaobaidd1/todo-list#run-it-locally">instructions</a>.
+            </p>
+            <button type="button" id="retry">Try again</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="demo.js"></script>
+  </body>
+</html>
